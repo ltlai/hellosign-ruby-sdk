@@ -142,7 +142,9 @@ module HelloSign
 
     def validate(response)
       if response.status >= 400
-        raise ERRORS[response.status].new error_message(response)
+        error = ERRORS[response.status].new error_message(response)
+        error.response_body = MultiJson.load(response.body)
+        raise error
       end
     end
 

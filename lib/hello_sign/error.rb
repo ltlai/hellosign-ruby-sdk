@@ -1,7 +1,9 @@
 module HelloSign
   module Error
     # Custom error class for rescuing from all HelloSign errors.
-    class Error < StandardError; end
+    class Error < StandardError
+      attr_accessor :response_body
+    end
 
     # Raise when attributes are missing.
     class MissingAttributes < Error; end
